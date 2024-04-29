@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# script/bootstrap: Installs dependencies in the local environment.
+
+mix deps.get
+cd priv/js && npm install

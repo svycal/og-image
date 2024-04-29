@@ -1,0 +1,23 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+/**
+ * Style `<em>` tags nested in headlines.
+ */
+h1 > em {
+  @apply not-italic underline;
+}
+
+/**
+  * Inline styles for emoji.
+  *
+  * See: https://github.com/jdecked/twemoji?tab=readme-ov-file#inline-styles 
+  */
+img.emoji {
+  height: 1em;
+  width: 1em;
+  margin: 0 .05em 0 .1em;
+  vertical-align: -0.1em;
+  display: inline;
+}

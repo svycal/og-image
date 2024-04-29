@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# script/server: Boots the server.
+
+iex -S mix phx.server

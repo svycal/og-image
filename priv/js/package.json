@@ -1,0 +1,10 @@
+{
+  "private": true,
+  "engines": {
+    "node": "18.x"
+  },
+  "dependencies": {
+    "puppeteer-core": "^14.4.1",
+    "@twemoji/api": "^15"
+  }
+}
