@@ -86,7 +86,7 @@ defmodule OgImageWeb.ImageHTML do
     ~H"""
     <body class="bg-[#F8F2E6] flex flex-col h-screen">
       <div class="shrink-0 pt-24 px-20 text-gray-900">
-        <.savvycal_logo />
+        <.fly_logo />
       </div>
       <div class="grow flex items-center px-20">
         <h1 class="font-extrabold text-gray-900 text-[7rem] leading-[1.2]">
@@ -101,7 +101,7 @@ defmodule OgImageWeb.ImageHTML do
 end
 ```
 
-These templates are wired up for Tailwind CSS by default. You're welcome to define reuable components and helper functions (like we've done with the `<.savvycal_logo />` component, which is defined in the `OgImageWeb.SharedComponents` module).
+These templates are wired up for Tailwind CSS by default. You're welcome to define reuable components and helper functions (like we've done with the `<.fly_logo />` component, which is defined in the `OgImageWeb.SharedComponents` module).
 
 The image controller serves content over two different routes:
 

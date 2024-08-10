@@ -6,12 +6,12 @@ defmodule OgImageWeb.ImageHTML do
   """
   def light(assigns) do
     ~H"""
-    <body class="bg-[#F8F2E6] flex flex-col h-screen">
+    <body class="bg-image flex flex-col h-screen">
       <div class="shrink-0 pt-24 px-20 text-gray-900">
-        <.savvycal_logo />
+        <.fly_logo />
       </div>
       <div class="grow flex items-center px-20">
-        <h1 class="font-extrabold text-gray-900 text-[7rem] leading-[1.2]">
+        <h1 class="font-extrabold bg-gradient-to-r from-[#2A1863] to-indigo-800 inline-block text-transparent bg-clip-text text-[7rem] leading-[1.2]">
           <%= @text %>
         </h1>
       </div>
@@ -26,7 +26,7 @@ defmodule OgImageWeb.ImageHTML do
     ~H"""
     <body class="bg-green-texture flex flex-col h-screen">
       <div class="shrink-0 pt-24 px-20 text-white">
-        <.savvycal_logo />
+        <.fly_logo />
       </div>
       <div class="grow flex items-center px-20">
         <h1 class="font-extrabold text-[#D2FD88] text-[7rem] leading-[1.2]">
@@ -44,7 +44,7 @@ defmodule OgImageWeb.ImageHTML do
     ~H"""
     <body class="bg-[#F8F2E6] flex items-center justify-center h-screen">
       <div>
-        <.savvycal_logo height="148" />
+        <.fly_logo height="148" />
       </div>
     </body>
     """

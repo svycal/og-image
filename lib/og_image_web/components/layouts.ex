@@ -27,7 +27,7 @@ defmodule OgImageWeb.Layouts do
         font-style: normal;
         font-weight: 100 900;
         font-display: swap;
-        src: url(<%= font_to_base64_url("InterVariable.woff2") %>) format("woff2");
+        src: url(<%= font_to_base64_url("mackinac-bold.woff2") %>) format("woff2");
       }
 
       @font-face {
@@ -50,6 +50,16 @@ defmodule OgImageWeb.Layouts do
       .bg-green-texture {
         background-image: url(<%= image_to_base64_url("green-texture.jpg") %>);
       }
+
+      .bg-image {
+        position: relative;
+        width: 100%;
+        height: 100vh; /* Adjust height as needed */
+        background-image: url(<%= image_to_base64_url("cloud-city.png") %>);
+        background-size: cover;
+        background-position: center;
+      }
+
     </style>
     """
   end
