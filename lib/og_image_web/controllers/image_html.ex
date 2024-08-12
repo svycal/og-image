@@ -7,11 +7,11 @@ defmodule OgImageWeb.ImageHTML do
   def light(assigns) do
     ~H"""
     <body class="bg-image flex flex-col h-screen">
-      <div class="shrink-0 pt-24 px-20 text-gray-900">
+      <div class="shrink-0 pt-24 px-20">
         <.fly_logo />
       </div>
       <div class="grow flex items-center px-20">
-        <h1 class="font-extrabold bg-gradient-to-r from-[#2A1863] to-indigo-800 inline-block text-transparent bg-clip-text text-[7rem] leading-[1.2]">
+        <h1 class="font-extrabold bg-gradient-to-b from-[#2A1863] via-[#2A1863] to-indigo-800 inline-block text-transparent bg-clip-text text-[5rem] leading-[1.2]">
           <%= @text %>
         </h1>
       </div>
