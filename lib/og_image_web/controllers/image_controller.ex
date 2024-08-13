@@ -4,16 +4,22 @@ defmodule OgImageWeb.ImageController do
   import OgImageWeb.ImageHelpers
   import OgImageWeb.ImageRenderer
 
-  def show(conn, %{"template" => "light", "text" => text}) do
+  def show(conn, %{"template" => "light_old", "text" => text}) do
     conn
     |> assign(:text, prepare_html(text))
-    |> render_image(:light)
+    |> render_image(:light_old)
   end
 
   def show(conn, %{"template" => "dark", "text" => text}) do
     conn
     |> assign(:text, prepare_html(text))
     |> render_image(:dark)
+  end
+
+  def show(conn, %{"template" => "light", "text" => text}) do
+    conn
+    |> assign(:text, prepare_html(text))
+    |> render_image(:light)
   end
 
   # -- Add more templates here --

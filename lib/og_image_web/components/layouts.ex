@@ -51,15 +51,27 @@ defmodule OgImageWeb.Layouts do
         background-image: url(<%= image_to_base64_url("green-texture.jpg") %>);
       }
 
-      .bg-image {
+      .bg-purple-texture {
+        <%!-- background-image: url(<%= image_to_base64_url("purple-texture.svg") %>); --%>
+        background-image: url(<%= image_to_base64_url("cloud-city.webp") %>);
         position: relative;
         width: 100%;
-        height: 100vh; /* Adjust height as needed */
-        background-image: url(<%= image_to_base64_url("cloud-city.png") %>);
-        background-size: cover;
-        background-position: center;
+        background-size: 100% 390px;
+        background-clip: content-box;
+        background-position: bottom center;
+        background-repeat: no-repeat;
       }
 
+      .bg-cloud-city {
+        position: relative;
+        width: 100%;
+        background-image: url(<%= image_to_base64_url("cloud-city.webp") %>);
+        background-size: 100% 390px;
+        background-clip: content-box;
+        background-position: bottom center;
+        background-repeat: no-repeat;
+        <%!-- margin-bottom: 100px; --%>
+      }
     </style>
     """
   end
