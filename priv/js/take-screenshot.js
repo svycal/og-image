@@ -64,7 +64,7 @@ async function takeScreenshot(html) {
     });
 
     // Take the screenshot of the page
-    file = await page.screenshot({ type: "png", encoding: "base64" });
+    file = await page.screenshot({ type: "webp", encoding: "base64" });
 
     await page.close();
   } finally {
