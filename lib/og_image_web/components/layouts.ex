@@ -76,6 +76,20 @@ defmodule OgImageWeb.Layouts do
     """
   end
 
+  # Public helpers
+
+  def image_to_base64_url(file_name) do
+    content_type = MIME.from_path(file_name)
+
+    data =
+      [Application.app_dir(:og_image), "priv/static/images/#{file_name}"]
+      |> Path.join()
+      |> File.read!()
+      |> Base.encode64()
+
+    "data:#{content_type};base64,#{data}"
+  end
+
   # Private helpers
 
   defp app_css do
@@ -92,15 +106,4 @@ defmodule OgImageWeb.Layouts do
     "data:font/woff2;charset=utf-8;base64,#{data}"
   end
 
-  defp image_to_base64_url(file_name) do
-    content_type = MIME.from_path(file_name)
-
-    data =
-      [Application.app_dir(:og_image), "priv/static/images/#{file_name}"]
-      |> Path.join()
-      |> File.read!()
-      |> Base.encode64()
-
-    "data:#{content_type};base64,#{data}"
-  end
 end

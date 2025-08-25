@@ -16,6 +16,12 @@ defmodule OgImageWeb.ImageController do
     |> render_image(:dark)
   end
 
+  def show(conn, %{"template" => "light_new", "text" => text}) do
+    conn
+    |> assign(:text, prepare_html(text))
+    |> render_image(:light_new)
+  end
+
   def show(conn, %{"template" => "light", "text" => text}) do
     conn
     |> assign(:text, prepare_html(text))
