@@ -122,31 +122,30 @@ defmodule OgImageWeb.ImageHTML do
         mask: radial-gradient(ellipse 120% 100% at 30% 70%, hsla(0, 0%, 0%, 0.8), hsla(0, 0%, 0%, 0.1) 70%);
       "></div>
       
-      <!-- Logo positioned bottom left -->
-      <div class="absolute bottom-12 left-12 z-20">
-        <.fly_logo height="64" />
-      </div>
-      
       <!-- Main content area -->
-      <div class="flex-1 flex items-center justify-between pl-20 pr-16">
+      <div class="flex-1 flex items-center pl-16 pr-12 pb-8">
         <!-- Text section -->
-        <div class="flex-1 max-w-2xl relative z-10">
-          <div class="mb-6">
-            <span class="relative inline-block text-3xl font-bold text-[#1a1347] tracking-tight">
-              Docs
+        <div class="flex-1 pr-12 relative z-10">
+          <!-- Logo and URL -->
+          <div class="mb-10 flex items-center gap-4">
+            <div class="w-16 h-16">
+              <.fly_logomark />
+            </div>
+            <span class="relative inline-block text-3xl font-semibold text-[#1a1347] tracking-tight">
+              fly.io/docs
               <svg
                 viewBox="0 0 1213 73"
                 aria-hidden="true"
                 preserveAspectRatio="none"
-                height="8"
-                class="absolute -bottom-0.5 left-0 w-full h-2"
+                height="6"
+                class="absolute -bottom-0.5 left-0 w-full h-1.5"
               >
                 <path
-                  fill="url(#underline-gradient)"
+                  fill="url(#underline-gradient-top)"
                   d="M1213.19 35.377c2.37-13.011-22.95-10.753-31.04-14.087C1086.89 5.705 911.742 2.887 815.218 2.809c-78.003.231-155.966-1.833-233.961.481-57.545.429-114.885 6.164-172.419 7.383-121.164 5.39-242.94 10.751-362.507 32.199-12.356 3.286-25.614 4.255-37.332 9.401-29.507 22.983 27.103 20.15 39.468 17.234 357.956-47.703 362.767-46.261 636.452-50.97 121.033-2.508 241.892 6.658 428.341 19.243 4.74.404 8.98-4.032 8-8.788a942.105 942.105 0 0154.69 6.378c9.44 1.843 18.92 3.583 28.29 5.729 4.01.839 8.02-1.718 8.95-5.712v-.01z"
                 />
                 <defs>
-                  <linearGradient id="underline-gradient" gradientTransform="rotate(110)">
+                  <linearGradient id="underline-gradient-top" gradientTransform="rotate(110)">
                     <stop offset="5%" stop-color="#CA7FF8" />
                     <stop offset="95%" stop-color="#795BE9" />
                   </linearGradient>
@@ -154,13 +153,23 @@ defmodule OgImageWeb.ImageHTML do
               </svg>
             </span>
           </div>
-          <h1 class="font-extrabold bg-gradient-to-br from-[#1a1347] via-[#2A1863] to-[#4338ca] inline-block text-transparent bg-clip-text text-[4.5rem] leading-[1.1] tracking-tight">
-            <%= @text %>
+          <%
+            # Extract string from {:safe, text} tuple if needed
+            raw_text = case @text do
+              {:safe, text} -> text
+              text when is_binary(text) -> text
+              _ -> to_string(@text)
+            end
+            clipped_text = OgImageWeb.ImageHTML.clip_text(raw_text, 20)
+            text_size_class = OgImageWeb.ImageHTML.get_text_size(clipped_text)
+          %>
+          <h1 class={"font-extrabold bg-gradient-to-br from-[#1a1347] via-[#2A1863] to-[#4338ca] inline-block text-transparent bg-clip-text leading-tight tracking-tight break-words #{text_size_class}"}>
+            <%= clipped_text %>
           </h1>
         </div>
         
         <!-- Frankie image section -->
-        <div class="flex items-center justify-center relative">
+        <div class="flex items-center justify-center relative flex-shrink-0">
           <div class="relative">
             <!-- Subtle glow behind frankie -->
             <div class="absolute inset-0 bg-purple-300/20 rounded-full blur-2xl scale-110"></div>
@@ -171,6 +180,40 @@ defmodule OgImageWeb.ImageHTML do
     </body>
     """
   end
+
+  # Helper function to determine text size based on length
+  def get_text_size(text) when is_binary(text) do
+    length = String.length(text)
+    
+    cond do
+      length <= 15 -> "text-[4.5rem]"    # Short text: large size
+      length <= 25 -> "text-[3.8rem]"    # Medium text: medium-large size
+      length <= 35 -> "text-[3.2rem]"    # Long text: medium size
+      length <= 50 -> "text-[2.6rem]"    # Very long text: smaller size
+      length <= 75 -> "text-[2.2rem]"    # Extra long text: much smaller size
+      true -> "text-[1.8rem]"            # Super long text: smallest size
+    end
+  end
+  
+  def get_text_size(_), do: "text-[4.5rem]"  # Fallback for non-binary values
+  
+  # Helper function to clip text based on word count
+  def clip_text(text, max_words \\ 5)
+  
+  def clip_text(text, max_words) when is_binary(text) do
+    words = String.split(text, " ", trim: true)
+    
+    if length(words) > max_words do
+      words
+      |> Enum.take(max_words)
+      |> Enum.join(" ")
+      |> Kernel.<>("...")
+    else
+      text
+    end
+  end
+  
+  def clip_text(text, _), do: text  # Fallback for non-binary values
 
   @doc """
   A fallback image.
