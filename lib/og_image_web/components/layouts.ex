@@ -38,6 +38,22 @@ defmodule OgImageWeb.Layouts do
         src: url(<%= font_to_base64_url("InterVariable-Italic.woff2") %>) format("woff2");
       }
 
+      @font-face {
+        font-family: 'PolySans';
+        font-style: normal;
+        font-weight: 500;
+        font-display: swap;
+        src: url(<%= font_to_base64_url("polysans-median.woff2") %>) format("woff2");
+      }
+
+      @font-face {
+        font-family: 'Fricolage Grotesque';
+        font-style: normal;
+        font-weight: 100 900;
+        font-display: swap;
+        src: url(<%= font_to_base64_url("fricolage-grotesque.var.woff2") %>) format("woff2");
+      }
+
       :root {
         font-family: InterVariable, sans-serif;
         font-feature-settings: 'liga' 1, 'calt' 1; /* fix for Chrome */
@@ -71,6 +87,30 @@ defmodule OgImageWeb.Layouts do
         background-position: bottom center;
         background-repeat: no-repeat;
         <%!-- margin-bottom: 100px; --%>
+      }
+
+      .bg-sprites {
+        background-color: #000000;
+      }
+
+      .bg-sprites-pattern {
+        background-image: url(<%= image_to_base64_url("bmxy.png") %>);
+        background-size: cover;
+        background-position: center;
+      }
+
+      .bg-sprites-noise {
+        background-image: url(<%= image_to_base64_url("noise.svg") %>);
+        background-repeat: repeat;
+        background-size: 150px 150px;
+      }
+
+      .font-sprites-heading {
+        font-family: 'PolySans', ui-sans-serif, system-ui, sans-serif;
+      }
+
+      .font-sprites-body {
+        font-family: 'Fricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
       }
     </style>
     """

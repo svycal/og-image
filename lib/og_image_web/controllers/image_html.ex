@@ -216,6 +216,87 @@ defmodule OgImageWeb.ImageHTML do
   def clip_text(text, _), do: text  # Fallback for non-binary values
 
   @doc """
+  A logo and text for Sprites on a dark background with halftone pattern.
+  """
+  def sprites(assigns) do
+    ~H"""
+    <body class="bg-sprites flex h-screen relative overflow-hidden">
+      <!-- Green halftone pattern layer - diagonal mask from top-right -->
+      <div class="absolute inset-0 bg-green-600" style="
+        -webkit-mask-image: linear-gradient(15deg, rgba(0,0,0,0) 45%, rgba(0,0,0,1) 80%);
+        mask-image: linear-gradient(15deg, rgba(0,0,0,0) 45%, rgba(0,0,0,1) 80%);
+      ">
+        <div class="absolute inset-0 bg-sprites-pattern"></div>
+      </div>
+
+      <!-- Subtle bottom glow -->
+      <div class="absolute inset-0 bg-green-600 opacity-10" style="
+        -webkit-mask-image: linear-gradient(15deg, rgba(0,0,0,1), rgba(0,0,0,0) 50%);
+        mask-image: linear-gradient(15deg, rgba(0,0,0,1), rgba(0,0,0,0) 50%);
+      ">
+        <div class="absolute inset-0 bg-sprites-pattern"></div>
+      </div>
+
+      <!-- Noise texture overlay -->
+      <div class="absolute inset-0 bg-sprites-noise mix-blend-overlay opacity-30 pointer-events-none"></div>
+
+      <!-- Main content area -->
+      <div class="flex-1 flex items-center px-20 relative z-10">
+        <!-- Text section -->
+        <div class="flex-1">
+          <!-- Logo -->
+          <div class="mb-8 flex items-center gap-4">
+            <svg class="relative top-px w-auto h-12" viewBox="0 0 724 582" fill-rule="evenodd">
+              <g>
+                <path d="M205.594 197.898h322.661v108.263H205.594z" fill="#16a34a" />
+                <path
+                  d="M578.582 508.799h-72.323v72.686h72.323v-72.686zm-361.614 0h-72.323v72.686h72.323v-72.686zm361.614-290.742h72.323v145.371h-72.323v72.686h-74.229 1.906v72.685H216.968v-72.685h-72.323v-72.686H72.323V218.057h72.322v-73.163h72.323V72.686h72.323v72.685h144.645V72.686h72.323v72.685h72.323v72.686zM72.323 508.799V363.428H0v145.371h72.323zm650.904 0V363.428h-72.322v145.371h72.322zM289.423 290.742h-.132.132zm-72.455-72.685h72.323v72.685h-72.323v-72.685zm216.968 0h72.323v72.685h-72.323v-72.685zM578.582 0h-72.323v72.686h72.323V0zM216.968 0h-72.323v72.686h72.323V0z"
+                  fill="#16a34a"
+                />
+                <path
+                  d="M144.645 363.428V218.057h72.323v-72.686h289.291v72.686h72.323v72.685l-.001.001v72.685h-72.322v72.686h-72.323V508.8H289.291v-72.686h-72.323v-72.686h-72.323zm144.646-72.686h-72.323v-72.685h72.323v72.685zm216.968 0h-72.323v-72.685h72.323v72.685z"
+                  fill="#22c55e"
+                />
+              </g>
+            </svg>
+            <span class="font-sprites-heading text-white text-3xl font-medium tracking-[-0.01em]">Sprites</span>
+          </div>
+          <%
+            # Extract string from {:safe, text} tuple if needed
+            raw_text = case @text do
+              {:safe, text} -> text
+              text when is_binary(text) -> text
+              _ -> to_string(@text)
+            end
+            clipped_text = OgImageWeb.ImageHTML.clip_text(raw_text, 20)
+            text_size_class = OgImageWeb.ImageHTML.get_sprites_text_size(clipped_text)
+          %>
+          <h1 class={"font-sprites-heading text-green-500 leading-[1.15] tracking-[-0.02em] break-words max-w-4xl #{text_size_class}"} style="font-weight: 500;">
+            <%= clipped_text %>
+          </h1>
+        </div>
+      </div>
+    </body>
+    """
+  end
+
+  # Helper function to determine text size for sprites template
+  def get_sprites_text_size(text) when is_binary(text) do
+    length = String.length(text)
+
+    cond do
+      length <= 20 -> "text-[4.5rem]"
+      length <= 35 -> "text-[3.8rem]"
+      length <= 50 -> "text-[3.2rem]"
+      length <= 75 -> "text-[2.6rem]"
+      length <= 100 -> "text-[2.2rem]"
+      true -> "text-[1.8rem]"
+    end
+  end
+
+  def get_sprites_text_size(_), do: "text-[4.5rem]"
+
+  @doc """
   A fallback image.
   """
   def fallback(assigns) do

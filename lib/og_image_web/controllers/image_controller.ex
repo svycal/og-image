@@ -28,6 +28,12 @@ defmodule OgImageWeb.ImageController do
     |> render_image(:light)
   end
 
+  def show(conn, %{"template" => "sprites", "text" => text}) do
+    conn
+    |> assign(:text, prepare_html(text))
+    |> render_image(:sprites)
+  end
+
   # -- Add more templates here --
 
   def show(conn, _params) do
