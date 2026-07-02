@@ -90,7 +90,7 @@ defmodule OgImageWeb.Layouts do
       }
 
       .bg-sprites {
-        background-color: #000000;
+        background-color: #17141f;
       }
 
       .bg-sprites-pattern {

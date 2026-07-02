@@ -298,8 +298,8 @@ defmodule OgImageWeb.ImageHTML do
   def sprites(assigns) do
     ~H"""
     <body class="bg-sprites flex h-screen relative overflow-hidden">
-      <!-- Green halftone pattern layer - diagonal mask from top-right -->
-      <div class="absolute inset-0 bg-green-600" style="
+      <!-- Violet halftone pattern layer - diagonal mask from top-right -->
+      <div class="absolute inset-0 bg-violet-600" style="
         -webkit-mask-image: linear-gradient(15deg, rgba(0,0,0,0) 45%, rgba(0,0,0,1) 80%);
         mask-image: linear-gradient(15deg, rgba(0,0,0,0) 45%, rgba(0,0,0,1) 80%);
       ">
@@ -307,7 +307,7 @@ defmodule OgImageWeb.ImageHTML do
       </div>
 
       <!-- Subtle bottom glow -->
-      <div class="absolute inset-0 bg-green-600 opacity-10" style="
+      <div class="absolute inset-0 bg-violet-600 opacity-10" style="
         -webkit-mask-image: linear-gradient(15deg, rgba(0,0,0,1), rgba(0,0,0,0) 50%);
         mask-image: linear-gradient(15deg, rgba(0,0,0,1), rgba(0,0,0,0) 50%);
       ">
@@ -325,14 +325,14 @@ defmodule OgImageWeb.ImageHTML do
           <div class="mb-8 flex items-center gap-4">
             <svg class="relative top-px w-auto h-12" viewBox="0 0 724 582" fill-rule="evenodd">
               <g>
-                <path d="M205.594 197.898h322.661v108.263H205.594z" fill="#16a34a" />
+                <path d="M205.594 197.898h322.661v108.263H205.594z" fill="#ad47ff" />
                 <path
                   d="M578.582 508.799h-72.323v72.686h72.323v-72.686zm-361.614 0h-72.323v72.686h72.323v-72.686zm361.614-290.742h72.323v145.371h-72.323v72.686h-74.229 1.906v72.685H216.968v-72.685h-72.323v-72.686H72.323V218.057h72.322v-73.163h72.323V72.686h72.323v72.685h144.645V72.686h72.323v72.685h72.323v72.686zM72.323 508.799V363.428H0v145.371h72.323zm650.904 0V363.428h-72.322v145.371h72.322zM289.423 290.742h-.132.132zm-72.455-72.685h72.323v72.685h-72.323v-72.685zm216.968 0h72.323v72.685h-72.323v-72.685zM578.582 0h-72.323v72.686h72.323V0zM216.968 0h-72.323v72.686h72.323V0z"
-                  fill="#16a34a"
+                  fill="#ad47ff"
                 />
                 <path
                   d="M144.645 363.428V218.057h72.323v-72.686h289.291v72.686h72.323v72.685l-.001.001v72.685h-72.322v72.686h-72.323V508.8H289.291v-72.686h-72.323v-72.686h-72.323zm144.646-72.686h-72.323v-72.685h72.323v72.685zm216.968 0h-72.323v-72.685h72.323v72.685z"
-                  fill="#22c55e"
+                  fill="#c27bff"
                 />
               </g>
             </svg>
@@ -348,7 +348,7 @@ defmodule OgImageWeb.ImageHTML do
             clipped_text = OgImageWeb.ImageHTML.clip_text(raw_text, 20)
             text_size_class = OgImageWeb.ImageHTML.get_sprites_text_size(clipped_text)
           %>
-          <h1 class={"font-sprites-heading text-green-500 leading-[1.15] tracking-[-0.02em] break-words max-w-4xl #{text_size_class}"} style="font-weight: 500;">
+          <h1 class={"font-sprites-heading text-[#c27bff] leading-[1.15] tracking-[-0.02em] break-words max-w-4xl #{text_size_class}"} style="font-weight: 500;">
             <%= clipped_text %>
           </h1>
         </div>
