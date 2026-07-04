@@ -28,10 +28,26 @@ defmodule OgImageWeb.ImageController do
     |> render_image(:light)
   end
 
-  def show(conn, %{"template" => "sprites", "text" => text}) do
+  def show(conn, %{"template" => "sprites_halftone", "text" => text}) do
     conn
     |> assign(:text, prepare_html(text))
-    |> render_image(:sprites)
+    |> render_image(:sprites_halftone)
+  end
+
+  # `sprites` is the primary (noir split) template — ignores the `text` param.
+  def show(conn, %{"template" => "sprites"}), do: render_image(conn, :sprites)
+
+  # Docs template — honours `text` as the page title (defaults when omitted).
+  def show(conn, %{"template" => "sprites_docs", "text" => text}) do
+    conn
+    |> assign(:text, prepare_html(text))
+    |> render_image(:sprites_docs)
+  end
+
+  def show(conn, %{"template" => "sprites_docs"}) do
+    conn
+    |> assign(:text, "Documentation")
+    |> render_image(:sprites_docs)
   end
 
   def show(conn, %{"template" => "machines_api", "text" => text}) do

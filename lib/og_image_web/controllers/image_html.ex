@@ -295,7 +295,7 @@ defmodule OgImageWeb.ImageHTML do
   @doc """
   A logo and text for Sprites on a dark background with halftone pattern.
   """
-  def sprites(assigns) do
+  def sprites_halftone(assigns) do
     ~H"""
     <body class="bg-sprites flex h-screen relative overflow-hidden">
       <!-- Violet halftone pattern layer - diagonal mask from top-right -->
@@ -352,6 +352,144 @@ defmodule OgImageWeb.ImageHTML do
             <%= clipped_text %>
           </h1>
         </div>
+      </div>
+    </body>
+    """
+  end
+
+  # -- Shared Sprites building blocks ----------------------------------------
+
+  @doc "Pixel-invader Sprites mark. Pass fills to recolour for light/dark backgrounds."
+  attr :class, :string, default: "w-16 h-16"
+  attr :fill, :string, default: "#c084fc"
+  attr :fill_accent, :string, default: "#c084fc"
+  attr :fill_inner, :string, default: "#e0c9ff"
+
+  def sprites_mark(assigns) do
+    ~H"""
+    <svg class={@class} viewBox="0 0 724 582" fill-rule="evenodd" aria-hidden="true">
+      <path d="M205.594 197.898h322.661v108.263H205.594z" fill={@fill} />
+      <path
+        d="M578.582 508.799h-72.323v72.686h72.323v-72.686zm-361.614 0h-72.323v72.686h72.323v-72.686zm361.614-290.742h72.323v145.371h-72.323v72.686h-74.229 1.906v72.685H216.968v-72.685h-72.323v-72.686H72.323V218.057h72.322v-73.163h72.323V72.686h72.323v72.685h144.645V72.686h72.323v72.685h72.323v72.686zM72.323 508.799V363.428H0v145.371h72.323zm650.904 0V363.428h-72.322v145.371h72.322zM289.423 290.742h-.132.132zm-72.455-72.685h72.323v72.685h-72.323v-72.685zm216.968 0h72.323v72.685h-72.323v-72.685zM578.582 0h-72.323v72.686h72.323V0zM216.968 0h-72.323v72.686h72.323V0z"
+        fill={@fill_accent}
+      />
+      <path
+        d="M144.645 363.428V218.057h72.323v-72.686h289.291v72.686h72.323v72.685l-.001.001v72.685h-72.322v72.686h-72.323V508.8H289.291v-72.686h-72.323v-72.686h-72.323zm144.646-72.686h-72.323v-72.685h72.323v72.685zm216.968 0h-72.323v-72.685h72.323v72.685z"
+        fill={@fill_inner}
+      />
+    </svg>
+    """
+  end
+
+  @doc "The fly.io-docs brush-stroke underline, recoloured with the Sprites violet→teal gradient."
+  attr :class, :string, default: "absolute -bottom-2 left-0 w-full h-5"
+  attr :from, :string, default: "#8b5cf6"
+  attr :to, :string, default: "#2ee6a1"
+
+  def sprites_underline(assigns) do
+    ~H"""
+    <svg viewBox="0 0 1213 73" aria-hidden="true" preserveAspectRatio="none" height="22" class={@class}>
+      <path
+        fill="url(#sprites-underline-gradient)"
+        d="M1213.19 35.377c2.37-13.011-22.95-10.753-31.04-14.087C1086.89 5.705 911.742 2.887 815.218 2.809c-78.003.231-155.966-1.833-233.961.481-57.545.429-114.885 6.164-172.419 7.383-121.164 5.39-242.94 10.751-362.507 32.199-12.356 3.286-25.614 4.255-37.332 9.401-29.507 22.983 27.103 20.15 39.468 17.234 357.956-47.703 362.767-46.261 636.452-50.97 121.033-2.508 241.892 6.658 428.341 19.243 4.74.404 8.98-4.032 8-8.788a942.105 942.105 0 0154.69 6.378c9.44 1.843 18.92 3.583 28.29 5.729 4.01.839 8.02-1.718 8.95-5.712v-.01z"
+      />
+      <defs>
+        <linearGradient id="sprites-underline-gradient" gradientTransform="rotate(110)">
+          <stop offset="5%" stop-color={@from} />
+          <stop offset="95%" stop-color={@to} />
+        </linearGradient>
+      </defs>
+    </svg>
+    """
+  end
+
+  @doc "Dark install-command pill: `$ curl https://sprites.dev/install.sh | bash`."
+  def sprites_install(assigns) do
+    ~H"""
+    <div
+      class="inline-flex items-center gap-3 font-mono text-[1.125rem] tracking-[0.2px] whitespace-nowrap"
+      style="background: rgba(11,6,22,0.80); border: 1px solid rgba(150,120,220,0.32); border-radius: 13px; padding: 0.9rem 1.5rem; box-shadow: 0 10px 34px rgba(0,0,0,0.42);"
+    >
+      <span class="font-semibold text-[#34e0a1]">$</span>
+      <span class="text-[#ece4ff]">curl https://sprites.dev/install.sh | bash</span>
+    </div>
+    """
+  end
+
+  @doc """
+  Primary Sprites template — the noir "split": text zone on the left over a
+  left-to-right darkening of the detective artwork, full lockup + install.
+  """
+  def sprites(assigns) do
+    ~H"""
+    <body class="bg-[#0a0713] flex h-screen relative overflow-hidden">
+      <div class="bg-sprites-footer absolute inset-0"></div>
+      <!-- Left-to-right darkening keeps the text zone legible over the artwork -->
+      <div class="absolute inset-0" style="
+        background: linear-gradient(90deg, rgba(8,5,16,0.96) 0%, rgba(8,5,16,0.90) 30%, rgba(8,5,16,0.45) 50%, rgba(8,5,16,0) 66%);
+      "></div>
+
+      <div class="absolute inset-y-0 left-0 flex flex-col justify-center" style="padding: 0 4.5rem;">
+        <div class="flex items-center gap-4" style="margin-bottom: 2.5rem;">
+          <.sprites_mark class="w-14 h-14" />
+          <span class="font-mono font-semibold text-[2.25rem] tracking-[0.5px] text-[#f6f2ff]">Sprites</span>
+        </div>
+        <h1 class="relative inline-block font-bold text-[#f7f4ff] leading-[1.04] tracking-[-1.5px] text-[4rem] whitespace-nowrap">
+          Stateful sandboxes
+          <.sprites_underline />
+        </h1>
+        <div class="italic text-[#c6b4ee] leading-[1.1] tracking-[-0.5px] text-[2.1rem] whitespace-nowrap" style="margin-top: 1.75rem;">
+          with checkpoint &amp; restore.
+        </div>
+        <div style="margin-top: 2.75rem;">
+          <.sprites_install />
+        </div>
+      </div>
+    </body>
+    """
+  end
+
+  @doc """
+  docs.sprites.dev template — mirrors the fly.io/docs layout (underlined URL
+  label + dynamic page-title headline) on the noir split artwork. Honours the
+  `text` param as the page title.
+  """
+  def sprites_docs(assigns) do
+    ~H"""
+    <body class="bg-[#0a0713] flex h-screen relative overflow-hidden">
+      <div class="bg-sprites-footer absolute inset-0" style="background-position: 58% center;"></div>
+      <!-- Left-to-right darkening keeps the text zone legible over the artwork -->
+      <div class="absolute inset-0" style="
+        background: linear-gradient(90deg, rgba(8,5,16,0.97) 0%, rgba(8,5,16,0.92) 34%, rgba(8,5,16,0.52) 52%, rgba(8,5,16,0.06) 70%);
+      "></div>
+
+      <!-- Logo above the page title (like the main template) -->
+      <div class="absolute inset-y-0 left-0 flex flex-col justify-center" style="padding: 0 4.5rem; max-width: 760px;">
+        <div class="flex items-center gap-4" style="margin-bottom: 2rem;">
+          <.sprites_mark class="w-12 h-12" />
+          <span class="font-mono font-semibold text-[1.75rem] tracking-[0.3px] text-[#f6f2ff]">Sprites</span>
+        </div>
+        <%
+          # Extract string from {:safe, text} tuple if needed
+          raw_text = case @text do
+            {:safe, text} -> text
+            text when is_binary(text) -> text
+            _ -> to_string(@text)
+          end
+          clipped_text = OgImageWeb.ImageHTML.clip_text(raw_text, 20)
+          text_size_class = OgImageWeb.ImageHTML.get_sprites_text_size(clipped_text)
+        %>
+        <h1 class={"font-bold text-[#f7f4ff] leading-[1.08] tracking-[-1px] break-words #{text_size_class}"}>
+          <%= clipped_text %>
+        </h1>
+      </div>
+
+      <!-- Footer: underlined docs.sprites.dev -->
+      <div class="absolute" style="left: 4.5rem; bottom: 3rem;">
+        <span class="relative inline-block font-mono font-semibold text-[1.4rem] tracking-[0.3px] text-[#c6b4ee]">
+          docs.sprites.dev
+          <.sprites_underline class="absolute -bottom-1 left-0 w-full h-2" />
+        </span>
       </div>
     </body>
     """
