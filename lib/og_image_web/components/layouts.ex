@@ -93,6 +93,12 @@ defmodule OgImageWeb.Layouts do
         background-color: #17141f;
       }
 
+      .bg-sprites-footer {
+        background-image: url(<%= image_to_base64_url("sprites-footer.webp") %>);
+        background-size: cover;
+        background-position: 72% center;
+      }
+
       .bg-sprites-pattern {
         background-image: url(<%= image_to_base64_url("bmxy.png") %>);
         background-size: cover;
