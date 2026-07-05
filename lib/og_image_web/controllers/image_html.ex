@@ -381,6 +381,43 @@ defmodule OgImageWeb.ImageHTML do
     """
   end
 
+  @doc "Official Sprites lockup (dark variant): pixel mark + PolySans wordmark as one SVG."
+  attr :class, :string, default: "h-12"
+
+  def sprites_logo(assigns) do
+    ~H"""
+    <svg class={@class} viewBox="0 0 68 18" fill="none" aria-label="Sprites" role="img">
+      <svg x="0" y="1" width="16" height="16" viewBox="0 0 724 582" fill-rule="evenodd">
+        <path d="M205.594 197.898h322.661v108.263H205.594z" fill="#c084fc" />
+        <path
+          d="M578.582 508.799h-72.323v72.686h72.323v-72.686zm-361.614 0h-72.323v72.686h72.323v-72.686zm361.614-290.742h72.323v145.371h-72.323v72.686h-74.229 1.906v72.685H216.968v-72.685h-72.323v-72.686H72.323V218.057h72.322v-73.163h72.323V72.686h72.323v72.685h144.645V72.686h72.323v72.685h72.323v72.686zM72.323 508.799V363.428H0v145.371h72.323zm650.904 0V363.428h-72.322v145.371h72.322zM289.423 290.742h-.132.132zm-72.455-72.685h72.323v72.685h-72.323v-72.685zm216.968 0h72.323v72.685h-72.323v-72.685zM578.582 0h-72.323v72.686h72.323V0zM216.968 0h-72.323v72.686h72.323V0z"
+          fill="#c084fc"
+        />
+        <path
+          d="M144.645 363.428V218.057h72.323v-72.686h289.291v72.686h72.323v72.685l-.001.001v72.685h-72.322v72.686h-72.323V508.8H289.291v-72.686h-72.323v-72.686h-72.323zm144.646-72.686h-72.323v-72.685h72.323v72.685zm216.968 0h-72.323v-72.685h72.323v72.685z"
+          fill="#e0c9ff"
+        />
+      </svg>
+      <g
+        transform="translate(22.0,13.0) scale(0.013,-0.013)"
+        fill="#F8F8F8"
+        stroke="#F8F8F8"
+        stroke-width="0.4"
+        stroke-linejoin="round"
+        stroke-linecap="round"
+      >
+        <path vector-effect="non-scaling-stroke" transform="translate(0.0,0)" d="M600 210Q600 151 566.5 101.0Q533 51 468.0 21.5Q403 -8 312 -8Q218 -8 153.0 28.0Q88 64 56.0 122.0Q24 180 24 248H156Q158 192 192.0 148.0Q226 104 312 104Q366 104 400.5 119.5Q435 135 449.5 157.5Q464 180 464 202Q464 241 431.0 265.5Q398 290 312 301Q213 314 155.5 340.5Q98 367 73.0 408.5Q48 450 48 512Q48 567 80.0 613.0Q112 659 172.5 685.5Q233 712 314 712Q401 712 459.0 681.0Q517 650 545.0 599.0Q573 548 574 488H445Q445 531 413.0 565.5Q381 600 312 600Q243 600 213.0 574.0Q183 548 183 518Q183 446 320 431Q411 420 471.5 398.5Q532 377 566.0 332.0Q600 287 600 210Z" />
+        <path vector-effect="non-scaling-stroke" transform="translate(609.0,0)" d="M170 453Q169 450 166.5 444.0Q164 438 164 434Q164 429 169 426L173 425Q180 425 183.0 431.0Q186 437 187 438Q213 483 254.5 509.5Q296 536 354 536Q421 536 473.5 500.0Q526 464 555.0 402.0Q584 340 584 264Q584 188 555.0 126.0Q526 64 473.5 28.0Q421 -8 354 -8Q297 -8 254.5 18.5Q212 45 187 91Q187 92 183.5 98.0Q180 104 172 101Q165 98 165 92Q165 85 170 77Q184 49 184 23V-192H56V528H184V508Q184 481 170 453ZM456 264Q456 331 422.0 375.5Q388 420 324 420Q283 420 251.0 399.0Q219 378 201.5 342.0Q184 306 184 264Q184 222 201.5 186.0Q219 150 251.0 129.0Q283 108 324 108Q388 108 422.0 152.5Q456 197 456 264Z" />
+        <path vector-effect="non-scaling-stroke" transform="translate(1194.0,0)" d="M175 415Q179 415 182.0 418.5Q185 422 186 425Q204 466 223.0 489.0Q242 512 278.0 524.0Q314 536 376 536V406Q364 407 343 407Q254 407 219.0 365.5Q184 324 184 229V0H56V528H184V499Q184 468 169 438Q165 430 165 425Q165 417 174 415Z" />
+        <path vector-effect="non-scaling-stroke" transform="translate(1571.0,0)" d="M56 720H184V592H56ZM56 528H184V0H56Z" />
+        <path vector-effect="non-scaling-stroke" transform="translate(1780.0,0)" d="M232 416V175Q232 143 234.5 131.0Q237 119 247.5 115.5Q258 112 287 112H376V0H260Q205 0 171.0 14.5Q137 29 120.5 64.0Q104 99 104 162V416H8V528H104V672H232V528H376V416Z" />
+        <path vector-effect="non-scaling-stroke" transform="translate(2157.0,0)" d="M533 232H149Q156 172 193.0 138.0Q230 104 290 104Q371 104 397 184H527Q509 97 449.5 44.5Q390 -8 289 -8Q206 -8 146.0 27.0Q86 62 55.0 123.5Q24 185 24 264Q24 346 56.0 407.5Q88 469 147.5 502.5Q207 536 287 536Q352 536 408.5 508.5Q465 481 500.5 421.5Q536 362 536 271Q536 255 533 232ZM408 320Q404 370 374.0 401.0Q344 432 291 432Q177 432 154 320Z" />
+        <path vector-effect="non-scaling-stroke" transform="translate(2702.0,0)" d="M267 92Q325 92 350.5 109.0Q376 126 376 155Q376 174 359.5 184.0Q343 194 314.0 199.5Q285 205 223 212Q115 225 77.5 270.5Q40 316 40 375Q40 419 66.0 455.5Q92 492 143.0 514.0Q194 536 266 536Q367 536 425.0 488.5Q483 441 488 366H362Q359 396 336.5 416.0Q314 436 263 436Q168 436 168 382Q168 367 175.5 357.0Q183 347 208.0 339.0Q233 331 282 326Q387 315 445.5 277.5Q504 240 504 165Q504 82 441.5 37.0Q379 -8 263 -8Q151 -8 89.5 41.5Q28 91 24 178H150Q151 142 177.5 117.0Q204 92 267 92Z" />
+      </g>
+    </svg>
+    """
+  end
+
   @doc "The fly.io-docs brush-stroke underline, recoloured with the Sprites violet→teal gradient."
   attr :class, :string, default: "absolute -bottom-2 left-0 w-full h-5"
   attr :from, :string, default: "#8b5cf6"
@@ -430,9 +467,8 @@ defmodule OgImageWeb.ImageHTML do
       "></div>
 
       <div class="absolute inset-y-0 left-0 flex flex-col justify-center" style="padding: 0 4.5rem;">
-        <div class="flex items-center gap-4" style="margin-bottom: 2.5rem;">
-          <.sprites_mark class="w-14 h-14" />
-          <span class="font-mono font-semibold text-[2.25rem] tracking-[0.5px] text-[#f6f2ff]">Sprites</span>
+        <div style="margin-bottom: 2.5rem;">
+          <.sprites_logo class="h-14" />
         </div>
         <h1 class="relative inline-block font-bold text-[#f7f4ff] leading-[1.04] tracking-[-1.5px] text-[4rem] whitespace-nowrap">
           Stateful sandboxes
@@ -465,9 +501,8 @@ defmodule OgImageWeb.ImageHTML do
 
       <!-- Logo above the page title (like the main template) -->
       <div class="absolute inset-y-0 left-0 flex flex-col justify-center" style="padding: 0 4.5rem; max-width: 760px;">
-        <div class="flex items-center gap-4" style="margin-bottom: 2rem;">
-          <.sprites_mark class="w-12 h-12" />
-          <span class="font-mono font-semibold text-[1.75rem] tracking-[0.3px] text-[#f6f2ff]">Sprites</span>
+        <div style="margin-bottom: 2rem;">
+          <.sprites_logo class="h-11" />
         </div>
         <%
           # Extract string from {:safe, text} tuple if needed
