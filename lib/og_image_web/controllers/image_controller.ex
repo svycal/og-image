@@ -56,6 +56,12 @@ defmodule OgImageWeb.ImageController do
     |> render_image(:machines_api)
   end
 
+  def show(conn, %{"template" => "jobs", "text" => text}) do
+    conn
+    |> assign(:text, prepare_html(text))
+    |> render_image(:jobs)
+  end
+
   # -- Add more templates here --
 
   def show(conn, _params) do
