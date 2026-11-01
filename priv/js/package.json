@@ -1,10 +1,10 @@
 {
   "private": true,
   "engines": {
-    "node": ">=22"
+    "node": ">=22.12"
   },
   "dependencies": {
-    "puppeteer-core": "^24.43.1",
-    "@twemoji/api": "^15"
+    "@twemoji/api": "^15",
+    "puppeteer-core": "^25.16.0"
   }
 }
